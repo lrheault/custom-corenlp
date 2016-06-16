@@ -2,6 +2,7 @@
 Custom classes to use with the Stanford CoreNLP library.
 
 These files are utility wrappers to use the Stanford CoreNLP library:
+
 1) NLPProcessorCoNLL.java produces an output in CoNLL format that preserves the original line numbering of files when submitting a batch input.  More specifically, the output has an index comprising the original line number, a sentence index nested within the original line index, and a word index nested within sentences.  This may be useful for processing large numbers of files in which the original numbering of lines matters. 
 
 Using this code requires substituting the file CoNLLOutputter.java in the CoreNLP 3.5.2 (2015-04-20) source code (i.e. decompiling CoreNLP, changing the file, and recompiling). 
