@@ -38,7 +38,7 @@ where:
 [input-dir]=directory containing original corpus files
 [output-dir]=output directory for CoNLL files.
 
-@uthor: L. Rheault
+@author: L. Rheault
 
 */
 
