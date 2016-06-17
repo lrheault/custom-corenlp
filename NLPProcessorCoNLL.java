@@ -45,32 +45,27 @@ where:
 
 public class NLPProcessorCoNLL {
 	public static void main(String[] args) throws IOException {
-
 		// Set the desired properties for CoreNLP.
 		Properties props = new Properties();
-		props.setProperty("annotators",
-			"tokenize, ssplit, pos, lemma");
-        // Set multi-threading to 6 (modify if needed).
-        props.put("nthreads", "6");
-        StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
-
+		props.setProperty("annotators","tokenize, ssplit, pos, lemma");
+        	// Set multi-threading to 6 (modify if needed).
+        	props.put("nthreads", "6");
+        	StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
 		Iterable<String> documents = IOUtils.readLines(args[0]);
-
 		for (String document : documents) {
-        	Iterable<String> lines = IOUtils.readLines(args[1]+"/"+document);
+        		Iterable<String> lines = IOUtils.readLines(args[1]+"/"+document);
 			int lineNumber = 1;
 			for (String line : lines) {
 				Annotation annotation = new Annotation(line);
 				pipeline.annotate(annotation);
-            	for (CoreMap sentence : annotation.get(CoreAnnotations.SentencesAnnotation.class)) {
-                	sentence.set(CoreAnnotations.LineNumberAnnotation.class,lineNumber);
-            	}
+            			for (CoreMap sentence : annotation.get(CoreAnnotations.SentencesAnnotation.class)) {
+                			sentence.set(CoreAnnotations.LineNumberAnnotation.class,lineNumber);
+            			}
 			lineNumber += 1;
 			PrintWriter out = new PrintWriter(new FileOutputStream(new File(args[2]+"/"+document+"-output"),true));
 			pipeline.conllPrint(annotation, out);
-            out.close();
+            		out.close();
 			}
 		}
 	}
 }
-
